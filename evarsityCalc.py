@@ -6,7 +6,7 @@ from urllib.request import urlopen
 #CONFIGURE 'loc' 'start' 'end' VARIABLES AS PER REQUIRMENT
 
 #CHANGE 'loc' TO DIRECTORY WHERE WEBPAGE IS DOWNLOADED
-loc = "file:///C:/Users/Abhishek/Downloads/Home%20Page4.html"
+loc = " "
 
 #CHANGE THE 'start' AND 'end' VARIABLES ACCORDING TO WEBPAGE
 start = 101  #starting point of Attendance data retrived from soup.find_all mehthod
