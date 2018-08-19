@@ -8,7 +8,7 @@ To excute:
 > save 'testRes' folder any directory (else see instruction-2)                         
 > specify 'loc' variable in evarsitycalc.py with testRes direcory                             
   
-To exceute with custom evarsity attendance page(instruction-2):              
+To exceute with diffrent evarsity account(instruction-2):              
 > log in your evarsity account                              
 > go to 'Attendance' section                                
 > save the webpage in system                              
