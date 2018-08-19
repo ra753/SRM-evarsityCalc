@@ -1,0 +1,195 @@
+var divMessageId =""
+var forWhat ="";
+var studentTotalFeedBackCount ="";
+var studentRegisterFeedBackCount ="";
+
+function saveStudentFeedBack(divId,theForm){
+  document.getElementById('cmdSave').disabled = true;
+  var subjectId =document.getElementById('txtCourseTitle').value;
+  var programme = document.getElementById('hdntxtProgramme').value;
+  var section = document.getElementById('hdntxtSection').value;
+  var txtClassStrength = document.getElementById('hdnStudentCount').value;
+  var hdnStudenId = document.getElementById('hdnStudentId').value;
+  var hdnAcademicYearid = document.getElementById('hdnAcademicYearId').value;
+  var hdnCourseId = document.getElementById('hdnCourseId').value;
+  var hdnPgsecid = document.getElementById('hdnPgsecid').value;
+  var semesterId = document.getElementById('txtSem').value;
+  var staffid = document.getElementById('txtCourseStaff').value;
+  var subjectTypeId = document.getElementById('hiddenSubjectTypeId').value;
+  var commentTextArea = document.getElementById('commentTextArea').value;
+  var totalFeedBackCount = document.getElementById('hdnTotalFeedBack').value;
+  divMessageId =divId;
+  var count =document.getElementById('rowCount').value;
+  var questionId="";
+  var answerNo ="";
+   var checkcount=1;
+    for( i=1;i<=count-1;i++){
+        if(document.getElementById('gradeSelect'+i).value != null){
+            questionId +=document.getElementById('questionNo'+i).value+",";
+            if(document.getElementById('gradeSelect'+i).value != '') {
+              answerNo +=document.getElementById('gradeSelect'+i).value+",";
+              checkcount++;
+            }
+        }
+    }
+ 
+   if(staffid == '') {
+       document.getElementById('cmdSave').disabled = false;
+       alert('Please Specify Staff Name To Proceed Further ');
+       return false;
+   }
+
+   if(checkcount <= count-1) {
+       document.getElementById('cmdSave').disabled = false;
+       alert('Please answer all the questions ');
+       return false;
+   }
+
+   if (commentTextArea.length > 250){
+       document.getElementById('cmdSave').disabled = false;
+        alert("Text too long. Must be 250 characters or less");
+        return false;
+    }
+    if (!window.confirm("Do you want to save?")) {
+        document.getElementById('cmdSave').disabled = false;
+        return false;
+    }
+    
+   forWhat =2;
+
+   document.getElementById('hiddenQuestionId').value=questionId;
+   document.getElementById('hiddenAnswerId').value=answerNo;
+
+   var previousSemester ="";
+   if( typeof(theForm.elements['txtSemester']) != "undefined") {
+       previousSemester =  document.getElementById('txtSemester').value;
+   } else {
+       previousSemester = semesterId;
+   }
+   
+   var url ="../../../Feedback/StudentFeedbackInnerForm.jsp";
+
+    if (window.XMLHttpRequest){
+        XMLHttp=new XMLHttpRequest();
+    }else if (window.ActiveXObject){
+        XMLHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    url =url+"?subjectId="+subjectId+"&programme="+programme+"&section="+section;
+    url =url+"&classstrenth="+txtClassStrength+"&studenId="+hdnStudenId;
+    url =url+"&academicyearid="+hdnAcademicYearid+"&courseid="+hdnCourseId;
+    url =url+"&hdnPgsecid="+hdnPgsecid+"&semesterId="+semesterId+"&forWhat=2";
+    url =url+"&staffid="+staffid;
+    url =url+"&hdnStudenId="+hdnStudenId;
+    url =url+"&hiddenQuestionId="+questionId+"&hiddenAnswerId="+answerNo;
+    url =url+"&subjectTypeId="+subjectTypeId;
+    url =url+"&commentTextArea="+commentTextArea;
+    url =url+"&totalFeedBack="+totalFeedBackCount;
+    url =url+"&previousSemester="+previousSemester;
+   
+    //document.getElementById(divMessageId).innerHTML="<html> <img src='../images/loading.gif'> </html>";
+    XMLHttp.onreadystatechange=sudententFeedBackChange;
+    XMLHttp.open("GET",url,true);
+    XMLHttp.send(null);
+}
+ 
+function sudententFeedBackChange(XMLHttp){
+    try{
+        if(XMLHttp.readyState==4 || XMLHttp.readyState=="complete"){
+             $.msg('unblock');
+            var message =XMLHttp.responseText;
+            document.getElementById(divMessageId).innerHTML=message;
+             studentTotalFeedBackCount =document.getElementById('hdnTotalFeedBack').value;
+             studentRegisterFeedBackCount = document.getElementById('hdnRegisterFeedBack').value;
+            if(forWhat=='2') {
+              alertFeedBackCount();
+            }
+        }
+    }catch(e){
+        alert("sudent enrollchange"+e.message);
+    }
+}
+var myVar; 
+function StudentSubjectInformation(url,divId,functionId, theForm){
+     ShowProgress();
+     myVar=setInterval(function(){StSubInf(url,divId,functionId, theForm)},400); 
+}
+
+function StSubInf(url,divId,functionId, theForm){
+    clearInterval(myVar);   
+    var programme,section,txtClassStrength;
+    var subjectTypeId,staffid,param;
+    var url1="SMID"
+    var subjectId =document.getElementById('txtCourseTitle').value;
+    var mode = theForm.elements['txtClassStrength'];
+  if( typeof(mode) != "undefined") {
+    subjectTypeId = document.getElementById('hiddenSubjectTypeId').value;   
+    staffid = document.getElementById('txtCourseStaff').value;    
+    var txtCourse=theForm.elements['txtCourseStaff'];
+    if(staffid != '') {
+    var txtCourseValue= txtCourse.options[txtCourse.selectedIndex].text;
+    var txtCourseSplit = txtCourseValue.split("-");
+     document.getElementById('hiddenSubjectTypeId').value =(txtCourseSplit[1] =='Theory') ? '1' :'2';
+
+    } else {staffid ='0'; }
+  }
+   var hdnStudenId = document.getElementById('hdnStudentId').value;
+   var hdnAcademicYearid = document.getElementById('hdnAcademicYearId').value;
+   var hdnCourseId = document.getElementById('hdnCourseId').value;
+   var hdnPgsecid = document.getElementById('hdnPgsecid').value;
+   var semesterId = document.getElementById('hdntxtSem').value;
+   programme = document.getElementById('hdntxtProgramme').value;
+   section = document.getElementById('hdntxtSection').value;
+   txtClassStrength = document.getElementById('hdnStudentCount').value;
+   var totalFeedBackCount = document.getElementById('hdnTotalFeedBack').value;
+   var previousSemester ="";
+   if( typeof(theForm.elements['txtSemester']) != "undefined") {
+       previousSemester =  document.getElementById('txtSemester').value;
+   } else {
+       previousSemester = semesterId;
+   }
+  divMessageId =divId;
+  forWhat =1; if(functionId =='3') {forWhat =3;}
+    
+    if(forWhat != 3)  {
+        param ="subjectId="+subjectId+"&programme="+programme+"&section="+section;   
+        param =param+"&classstrenth="+txtClassStrength+"&studenId="+hdnStudenId;
+        param =param+"&academicyearid="+hdnAcademicYearid+"&courseid="+hdnCourseId;
+        param =param+"&hdnPgsecid="+hdnPgsecid+"&semesterId="+semesterId+"&forWhat="+forWhat;
+        param =param+"&hdnStudenId="+hdnStudenId;
+        param =param+"&subjectTypeId="+subjectTypeId;
+        param =param+"&staffid="+staffid;
+        param =param+"&functionId="+functionId;
+        param =param+"&totalFeedBack="+totalFeedBackCount;
+        param =param+"&previousSemester="+previousSemester;
+    } else {
+        param ="programme="+programme+"&section="+section;
+        param =param+"&classstrenth="+txtClassStrength+"&studenId="+hdnStudenId;
+        param =param+"&academicyearid="+hdnAcademicYearid+"&courseid="+hdnCourseId;
+        param =param+"&hdnPgsecid="+hdnPgsecid+"&semesterId="+semesterId+"&forWhat="+forWhat;
+        param =param+"&hdnStudenId="+hdnStudenId;
+        param =param+"&subjectTypeId="+subjectTypeId;
+        param =param+"&functionId="+functionId;
+        param =param+"&totalFeedBack="+totalFeedBackCount;
+        param =param+"&previousSemester="+previousSemester;
+    } 
+    
+    httpPostFnbk(url1,"&"+url+ "&"+param,function(rVal){sudententFeedBackChange(rVal);}); 
+}
+
+function limitText(limitField, limitNum) {
+    if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+    }
+}
+
+function alertFeedBackCount() {
+
+     if((studentTotalFeedBackCount == null) || studentTotalFeedBackCount =='') {
+         return;
+     }
+     var feedBackCount = studentTotalFeedBackCount-studentRegisterFeedBackCount;
+     if( feedBackCount > 0) {
+         alert('STILL YOU HAVE TO REGISTER '+feedBackCount+' FEED BACK');
+      }
+   
+}

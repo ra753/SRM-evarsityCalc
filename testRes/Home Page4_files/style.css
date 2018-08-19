@@ -1,0 +1,58 @@
+/* 
+    Document   : style
+    Created on : Jun 19, 2013, 3:37:52 PM
+    Author     : srm
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.style th{
+        text-align: center;
+        font-family: verdana, sans-serif,helvetica, arial;
+        font-style: normal;
+        font-size: 11px;
+        font-weight: bold;
+        background-color:#2F78AA;
+        color:#d0d0cd;
+        border: 1px solid #C0C0C0;
+        height: 15px;
+    }
+    .style td{
+        text-transform: capitalize;
+        font-size: 10px;
+        font-weight: normal;
+        text-align: center;
+        font-family: verdana, sans-serif,helvetica, arial;
+        font-style: normal;
+        border: 1px solid #C0C0C0;
+/*        color:#5d5e5d;*/
+
+    }
+    #style{
+        background-color:#b0b8b8;
+   
+    }
+     
+    .style1 th{
+        text-align: center;
+        font-family: verdana, sans-serif,helvetica, arial;
+        font-style: normal;
+        font-size: 11px;
+        font-weight: bold;
+        background-color:#2F78AA;
+        color:#d0d0cd;
+        border: 1px solid #C0C0C0;
+        height: 15px;
+    }
+    .style1 td{
+        font-family: verdana, sans-serif,helvetica, arial;
+        font-style: normal;
+        font-size: 11px;
+        font-weight: normal; 
+    }
+

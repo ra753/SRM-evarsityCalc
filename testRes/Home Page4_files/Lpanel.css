@@ -1,0 +1,155 @@
+/* 
+    Document   : Lpenal
+    Created on : Jun 18, 2013, 10:36:44 AM
+    Author     : srm
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.payButton{
+    background-color: #2F78AA;
+    color: white;
+    border: 1px solid #F2F2F2;
+    border-radius: 10px;
+    padding: 2px 10px 2px 10px;
+}
+.payButton:disabled{
+    background-color: #F2F2F2;
+    color: black;
+    border: 1px solid #2F78AA;
+}
+.inputtext{
+    background-color: #ccc;  
+    border: 1px solid #327FB5;
+}
+.inputtextenable{
+    border: 1px solid #327FB5;
+    background-color: white;
+}
+.lefttnav{
+
+    margin-top: 0px;
+    margin-left: 0px;
+    float: left;
+    border: 1px solid #C0C0C0;
+
+}
+.leftbnav{
+
+    margin-left: 0px;
+    float: left;
+    border: 1px solid #C0C0C0;
+}
+th{
+    text-align: center;
+    font-family:Tahoma,sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    font-weight: bold;
+    background-color:#2F78AA;
+    color:#d0d0cd;
+    width: 200px;
+    border-bottom: 1px solid #C0C0C0;
+    height: 15px;
+
+}
+#info td{
+    text-transform: capitalize;
+    font-size: 11px;
+    font-weight: normal;
+    font-family: verdana, sans-serif,helvetica, arial;
+    font-style: normal;
+    border: 1px solid #fff;
+    background-color: #F2F2F2 ;
+    color:#5d5e5d;
+
+}
+
+#service td{
+    font-size: 11px;
+    font-family:verdana, sans-serif,helvetica, arial;
+    font-style: normal;
+    border: 1px solid #fff;
+    font-weight: normal;
+    background-color: #F2F2F2 ;
+    color:#5d5e5d;
+}
+.News{
+    margin-left: 0px;
+    float: left;
+    height:120px;
+    width:200px;
+    background-color: #F2F2F2 ;
+    border: 1px solid #C0C0C0;
+}
+
+h1{
+    text-align:center;
+    font-weight: bold;
+    font-family:Tahoma, verdana, sans-serif;
+    background-color:#2F78AA;
+    font-size: 11px;
+    margin-top: 0px;
+    color:#d0d0cd;
+    line-height: 20px;
+}
+
+#service1 td{
+    font-size: 14px;
+    font-family:verdana, sans-serif,helvetica, arial;
+    font-style: normal;
+    border: 1px solid #fff;
+    font-weight: normal;
+    background-color: #F2F2F2 ;
+    color:#5d5e5d;
+}
+
+#service2 td{
+    font-size: 12px;
+    font-family:verdana, sans-serif,helvetica, arial;
+    font-style: normal;
+    border: 1px solid #fff;
+    font-weight: normal;
+    background-color: #F2F2F2 ;
+    color:#5d5e5d;
+}
+
+#th1{
+    text-align: center;
+    font-family:Tahoma,sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    font-weight: bold;
+    background-color:#2F78AA;
+    color:#d0d0cd;
+    width: 200px;
+    border-bottom: 1px solid #C0C0C0;
+    height: 15px;
+
+}
+
+.tablehead{
+    text-align:center;
+    font-weight: bold;
+    font-family:Tahoma, verdana, sans-serif;
+    background-color:#2F78AA;
+    font-size: 15px;
+    margin-top: 0px;
+    color:#d0d0cd;
+    line-height: 20px;
+}
+
+.tdstyle{
+    font-family:Tahoma, verdana, sans-serif;
+    font-size: 12px;
+    height: 20px;
+}
+
+.tdstyle:hover{
+    background-color: #F2F0E6;
+    color: #055794;
+}

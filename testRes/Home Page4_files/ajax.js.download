@@ -1,0 +1,59 @@
+function getHead(_s){var reg = /\<head[^>]*\>([^]*)\<\/head/m;    return _s.match( reg )[1];}
+function getScript(_s){var reg = /\<script[^>]*\>([^]*)\<\/script/m;    return _s.match( reg )[1];}
+function escapeRegExp(str) {return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");}
+function replaceAll(str, find, replace) { return str.replace(new RegExp(escapeRegExp(find), 'g'), replace); }
+function smtrim(_s){return _s.replace(/^\s+|\s+$/g,'');}
+function hsbs(_s){var h=getHead(_s); _s=replaceAll(_s,h,""); return replaceAll(_s,"<body>","<body>"+h);}
+function hsbs1(_s){ var head = getScript(str);head+="</script>";var st=replaceAll(str,head,"");return replaceAll(st,"<body>","<body>"+head);}
+function smat(u,p){
+    var Crypjs;var key=null; try {key=document.getElementById("txtp").value}catch(e){key=null};
+    if(key==null){return p;}Crypjs = new JSEncrypt();Crypjs.setKey(key);var t="";if(p.length>1){t= p.charAt(p.length-1);}par=p.split('=');
+    for (var i = 0;i < par.length;  i++) {if(par[i]=="smhid"){p=Crypjs.encrypt(par[i]);p = encodeURIComponent(p);p+="sm#="+par[i+1];if(t=="="){p+="=";}i++;} }
+    return p;
+} 
+function xmlhttpPost(contType,strURL, queryStr,resDiv,callbkfn) {
+  //  if( (smtrim(strURL)=='' ||  smtrim(resDiv)=='') && smtrim(callbkfn)=='' ) {alert('Please some information is missing to submit the page!');return;}
+//    if(  (smtrim(resDiv)=='') && smtrim(callbkfn)=='' ) {alert('Please some information is missing to submit the page!');return;}
+    var xmlHttpReq = false;var self = this;if (window.XMLHttpRequest) {self.xmlHttpReq = new XMLHttpRequest(); }
+    else if (window.ActiveXObject){self.xmlHttpReq = new ActiveXObject('Microsoft.XMLHTTP');}else{alert('no ajax');return;}
+    self.xmlHttpReq.open('POST', strURL, false);
+    self.xmlHttpReq.setRequestHeader('Cache-Control', "no-cache, no-store, must-revalidate");
+    self.xmlHttpReq.setRequestHeader('Content-Type', contType);
+    self.xmlHttpReq.onreadystatechange = function() {
+    if (self.xmlHttpReq.readyState == 1 ){if(callbkfn==""){updatepageConfirm(resDiv,self.xmlHttpReq.responseText);}else{ callbkfn(self.xmlHttpReq); }}
+    else if (self.xmlHttpReq.readyState == 4 ||  self.xmlHttpReq.readyState=="complete"){
+        if(callbkfn==""){updatepageConfirm(resDiv,self.xmlHttpReq.responseText);}else{callbkfn(self.xmlHttpReq);  }}
+    }
+    self.xmlHttpReq.send(smat(strURL,queryStr));
+//    self.xmlHttpReq.send(queryStr);
+}   
+function xmlhttpGet(contType,strURL, queryStr,resDiv) {
+    var xmlHttpReq = false;var self = this;
+    if (window.XMLHttpRequest) {self.xmlHttpReq = new XMLHttpRequest(); }
+    else if (window.ActiveXObject){self.xmlHttpReq = new ActiveXObject('Microsoft.XMLHTTP');}else{ alert('Ajax Not supported'); return; }
+    strURL=strURL+'?' + queryStr;self.xmlHttpReq.open('GET', strURL, false);
+    self.xmlHttpReq.setRequestHeader('Cache-Control', "no-cache, no-store, must-revalidate");
+    self.xmlHttpReq.setRequestHeader('Content-Type', contType);
+    self.xmlHttpReq.onreadystatechange = function() {
+    if (self.xmlHttpReq.readyState == 4) {updatepageConfirm(resDiv,self.xmlHttpReq.responseText);}}
+    self.xmlHttpReq.send(null);
+}
+function httpPostDiv(strURL, queryStr,resDiv){
+    if( (smtrim(queryStr)=='' || smtrim(resDiv)=='')) {alert('Please some information is missing to submit the page!');return;}
+    xmlhttpPost("application/x-www-form-urlencoded;charset=utf-8",strURL, queryStr,resDiv,"");
+//    xmlhttpPost("application/x-www-form-urlencoded",strURL, queryStr,resDiv,"");
+}
+function httpPostFnbk(strURL, queryStr,callbkfn){
+    if( (smtrim(queryStr)=='' || callbkfn=='' || callbkfn==null)) {alert('Please some information is missing to submit the page!');return;}
+    xmlhttpPost("application/x-www-form-urlencoded;charset=utf-8",strURL, queryStr,"",callbkfn);
+}
+function httpGet(strURL, queryStr,resDiv) {alert('Not supported!');}
+function updatepageConfirm(sDiv,str){
+     var div1 = document.getElementById('jquery-msg-content');
+    div1.innerHTML = '<img src="/srmsip/Images/sm/Images/loading3.gif" /> Please wait Loading...';    
+     document.getElementById('divcontent').innerHTML='';
+    if( str=="" || $(str).find('#loginform1').length >0 ) {
+        $( '#'+sDiv ).append( "<form id='loginform1' name='loginform1' autocomplete='off' method='post' action='/srmsip/'></form>" );
+        document.getElementById('loginform1').submit();
+    }else{  $( '#'+sDiv ).append( str );  $.msg('unblock');   }
+}

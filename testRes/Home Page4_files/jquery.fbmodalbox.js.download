@@ -1,0 +1,61 @@
+
+function FbMsgBox(msg,nType,callbkfn){
+    if ($('.msg_content').length > 0){ return;}$(".msg_content").remove();
+    $('body').append("<div id='msg_content' name='msg_content' class='msg_content'></div>");
+    $('.msg_content').append(msg +"<br/><br/>");
+    if(nType=="MB_OKCANCEL"){
+        $(".msg_content").fbmodal({ okay:"OK",cancel:"Cancel",okaybutton:true, cancelbutton: true,modalwidth: "400"},callbkfn);
+    }else if(nType=="MB_OK"){
+         $(".msg_content").fbmodal({ okay:"OK",okaybutton:true, cancelbutton: false,modalwidth: "400"},callbkfn);
+    }else if(nType=="MB_CANCEL"){
+        $(".msg_content").fbmodal({ cancel:"Cancel",okaybutton:false, cancelbutton: true,modalwidth: "400"},callbkfn);
+    }else if(nType=="MB_YESNO"){
+         $(".msg_content").fbmodal({ okay:"Yes",cancel:"No",okaybutton:true, cancelbutton: true,modalwidth: "400"},callbkfn);
+    }else if(nType=="MB_YES"){
+          $(".msg_content").fbmodal({ okay:"Yes",okaybutton:true, cancelbutton: false,modalwidth: "400"},callbkfn);
+    }else if(nType=="MB_NO"){
+         $(".msg_content").fbmodal({cancel:"No",okaybutton:false, cancelbutton: true,modalwidth: "400"},callbkfn);
+    }
+
+}
+
+
+//function FbCMsgBox(msg,nType,callbkfn){
+//    if ($('.msg_content').length > 0){ return;}$(".msg_content").remove();
+//    $('body').append("<div id='msg_content' name='msg_content' class='msg_content'></div>");
+//    $('.msg_content').append(msg +"<br/>");
+//    if(nType=="MB_OKCANCEL"){
+//        $(".msg_content").fbmodal({ okay:"Ok",cancel:"Cancel",okaybutton:true, cancelbutton: true,modalwidth: "400"},callbkfn);
+//    }else if(nType=="MB_OK"){
+//         $(".msg_content").fbmodal({ okay:"Ok",okaybutton:true, cancelbutton: false,modalwidth: "400"},callbkfn);
+//    }else if(nType=="MB_CANCEL"){
+//        $(".msg_content").fbmodal({ cancel:"Cancel",okaybutton:false, cancelbutton: true,modalwidth: "400"},callbkfn);
+//    }else if(nType=="MB_YESNO"){
+//         $(".msg_content").fbmodal({ okay:"Yes",cancel:"No",okaybutton:true, cancelbutton: true,modalwidth: "400"},callbkfn);
+//    }else if(nType=="MB_YES"){
+//          $(".msg_content").fbmodal({ okay:"Yes",okaybutton:true, cancelbutton: false,modalwidth: "400"},callbkfn);
+//    }else if(nType=="MB_NO"){
+//         $(".msg_content").fbmodal({cancel:"No",okaybutton:false, cancelbutton: true,modalwidth: "400"},callbkfn);
+//    }
+//}
+ 
+function ClseMsgFbDv(){
+    $(".msg_content").remove();
+}
+function MsgBox(msg,nType){
+ //MB_OKCANCEL,MB_OK,MB_CANCEL,MB_YESNO,MB_YES,MB_NO
+    alert(msg);
+     FbMsgBox(msg,nType,function(rVal){
+         ClseMsgFbDv();callbkfn(rVal);
+     });
+}
+
+function ConfirmMsgBox(msg,nType,callbkfn){    
+    //MB_OKCANCEL,MB_OK,MB_CANCEL,MB_YESNO,MB_YES,MB_NO
+    //
+    //var r= confirm(msg);  callbkfn((r==true)?1:2);
+     FbCMsgBox(msg,nType,function(rVal){
+         ClseMsgFbDv();callbkfn(rVal);
+     });
+   
+}
