@@ -3,7 +3,10 @@ Calculates required hours to make attendance at least 75%, and number of hours a
 It uses BeautifulSoup 4.4 for scraping data from web page along with urllib.request library to retrive web page. Due to restriction against inspecting elements on evarsity website, web page download is neccessary.
 
 Sample Output:
-![alt text](https://raw.githubusercontent.com/ra753/SRM-evarsityCalc/Master/screenshot.png)
+
+
+![Screenshot](screenshot.png)
+
 To excute:                                                        
 > python 3                        
 > install BeautifulSoup v4.0 or above                      
